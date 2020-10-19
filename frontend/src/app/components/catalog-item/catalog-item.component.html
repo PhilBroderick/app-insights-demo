@@ -1,0 +1,13 @@
+<img src="" />
+<div class="card-body">
+  <h5 class="card-title">{{ catalogItem.name }}</h5>
+  <p class="card-text">{{ catalogItem.description }}</p>
+  <div class="d-flex justify-content-between">
+    <a href="#" class="btn btn-secondary">{{
+      catalogItem.price | currency: "GBP"
+    }}</a>
+    <button class="btn btn-primary" (click)="addToCart(catalogItem.id)">
+      Add
+    </button>
+  </div>
+</div>
