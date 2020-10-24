@@ -1,5 +1,6 @@
+import { BasketService } from "./../../services/basket.service";
 import { CatalogItem } from "./../../models/catalog-item.model";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ApplicationInsightsService } from "src/app/services/application-insights.service";
 
 @Component({
@@ -9,11 +10,12 @@ import { ApplicationInsightsService } from "src/app/services/application-insight
 })
 export class CatalogItemComponent implements OnInit {
   @Input() catalogItem: CatalogItem;
+  @Output() addToBasket: EventEmitter<CatalogItem> = new EventEmitter();
   constructor(private aiService: ApplicationInsightsService) {}
 
   ngOnInit() {}
 
-  addToCart = (id: number) => {
-    this.aiService.logEvent("add-to-cart", { id });
+  addToCart = (catalogItem: CatalogItem) => {
+    this.addToBasket.emit(catalogItem);
   };
 }

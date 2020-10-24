@@ -1,1 +1,36 @@
-<p>nav-bar works!</p>
+<div class="navbar navbar-dark bg-primary navbar-expand">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand">
+      AppInsightsDemo <i class="fas fa-tv"></i
+    ></a>
+    <div>
+      <ul class="navbar-nav mr-auto">
+        <li
+          *ngIf="isLoggedIn()"
+          class="nav-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <!-- <a routerLink="/catalog" class="nav-link">Catalog</a> -->
+          <app-basket></app-basket>
+        </li>
+        <li
+          *ngIf="!isLoggedIn()"
+          class="nav-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a routerLink="/login" class="nav-link">Login</a>
+        </li>
+        <li
+          *ngIf="isLoggedIn()"
+          class="nav-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a (click)="logout()" href="#" class="nav-link">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

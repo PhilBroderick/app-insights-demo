@@ -4,4 +4,5 @@ export class CatalogItem {
   description: string;
   price: number;
   quantityInStock: number;
+  imageName: string;
 }

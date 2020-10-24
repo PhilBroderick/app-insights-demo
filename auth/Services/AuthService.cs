@@ -18,7 +18,8 @@ namespace auth.Services
     {
         private readonly IEnumerable<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Phil", LastName = "Broderick", Username = "philbroderick", Password = "Password1" }
+            new User { Id = 1, FirstName = "Phil", LastName = "Broderick", Username = "user1", Password = "Password1" },
+            new User { Id = 2, FirstName = "Phil", LastName = "Broderick", Username = "user2", Password = "Password2"}
         };
 
         private readonly AppSettings _appSettings;

@@ -46,5 +46,10 @@ export class AuthService {
 
   getLoggedInUserToken = (): string => localStorage.getItem("token");
 
-  isLoggedInUser = (): boolean => this.isLoggedIn;
+  isLoggedInUser = (): boolean => {
+    const token = localStorage.getItem("token");
+    return !this.jwtHelper.isTokenExpired(token);
+  };
+
+  logout = () => localStorage.removeItem("token");
 }

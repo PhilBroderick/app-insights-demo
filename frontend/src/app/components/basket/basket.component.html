@@ -1,0 +1,29 @@
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="basket"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Basket
+  </button>
+  <div class="dropdown-menu" aria-labelledby="basket">
+    <button
+      *ngFor="let item of basketService.basket$ | async"
+      class="dropdown-item"
+      type="button"
+    >
+      {{ item.id }}
+    </button>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-danger" (click)="basketService.clearBasket()">
+        Clear
+      </button>
+      <button class="btn btn-success" (click)="basketService.checkout()">
+        Checkout
+      </button>
+    </div>
+  </div>
+</div>

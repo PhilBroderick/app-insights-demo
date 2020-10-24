@@ -1,3 +1,4 @@
+import { BasketService } from "./../../services/basket.service";
 import { CatalogItem } from "./../../models/catalog-item.model";
 import { CatalogService } from "./../../services/catalog.service";
 import { Component, OnInit } from "@angular/core";
@@ -9,11 +10,18 @@ import { Component, OnInit } from "@angular/core";
 })
 export class CatalogListComponent implements OnInit {
   catalogItems: CatalogItem[];
-  constructor(private catalogService: CatalogService) {}
+  constructor(
+    private catalogService: CatalogService,
+    private basketService: BasketService
+  ) {}
 
   ngOnInit() {
     this.catalogService.getCatalogItemsInStock().subscribe((response) => {
       this.catalogItems = response;
     });
   }
+
+  addToBasketEvent = (catalogItem: CatalogItem) => {
+    this.basketService.addToBasket(catalogItem, 1);
+  };
 }

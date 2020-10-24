@@ -1,4 +1,4 @@
-<img src="" />
+<img src="{{ catalogItem.imageName }}" class="card-img-top" />
 <div class="card-body">
   <h5 class="card-title">{{ catalogItem.name }}</h5>
   <p class="card-text">{{ catalogItem.description }}</p>
@@ -6,7 +6,7 @@
     <a href="#" class="btn btn-secondary">{{
       catalogItem.price | currency: "GBP"
     }}</a>
-    <button class="btn btn-primary" (click)="addToCart(catalogItem.id)">
+    <button class="btn btn-primary" (click)="addToCart(catalogItem)">
       Add
     </button>
   </div>

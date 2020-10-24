@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^5.0.1",
+    "@fortawesome/fontawesome": "^1.1.8",
     "@microsoft/applicationinsights-web": "^2.5.9",
     "angular-jwt": "github:auth0/angular-jwt",
     "bootstrap": "^4.5.3",
