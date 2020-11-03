@@ -30,7 +30,7 @@ namespace basket.Controllers
         [Authorize]
         public IActionResult AddItemToBasket(AddItemRequest model)
         {
-            return Ok(_basketService.AddItemToBasket(new BasketItem { Id = model.Id, Price = model.Price, Quantity = model.Quantity }));
+            return Ok(_basketService.AddItemToBasket(new BasketItem { Id = model.Id, Name = model.Name, Price = model.Price, Quantity = model.Quantity }));
         }
 
         [HttpDelete]

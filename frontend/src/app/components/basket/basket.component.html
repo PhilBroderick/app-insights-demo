@@ -15,7 +15,7 @@
       class="dropdown-item"
       type="button"
     >
-      {{ item.id }}
+      {{ item.name }} x {{ item.quantity }}
     </button>
     <div class="d-flex justify-content-center">
       <button class="btn btn-danger" (click)="basketService.clearBasket()">
