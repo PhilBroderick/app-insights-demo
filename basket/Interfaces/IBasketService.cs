@@ -1,4 +1,5 @@
 ﻿using basket.Entities;
+using basket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace basket.Interfaces
         IEnumerable<BasketItem> GetBasket();
         IEnumerable<BasketItem> AddItemToBasket(BasketItem basketItem);
         void ClearBasket();
+        CheckoutResponse Checkout();
     }
 }

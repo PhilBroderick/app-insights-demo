@@ -33,8 +33,13 @@ export class BasketService {
   addToBasket = (catalogItem: CatalogItem, quantity: number) => {
     this.http
       .post<BasketItem[]>(
-        this.basketApiUrl,
-        { id: catalogItem.id, name: catalogItem.name, price: catalogItem.price, quantity },
+        `${this.basketApiUrl}/add`,
+        {
+          id: catalogItem.id,
+          name: catalogItem.name,
+          price: catalogItem.price,
+          quantity,
+        },
         { headers: this.headers }
       )
       .subscribe((response) => {
@@ -49,11 +54,18 @@ export class BasketService {
   };
 
   checkout = () => {
+    this.http
+      .post(
+        `${this.basketApiUrl}/checkout`,
+        { Basket: this.basketSubject.getValue() },
+        { headers: this.headers }
+      )
+      .subscribe((response) => console.log(response));
     try {
       this.aiService.logEvent("checkout", {
         cart: this.basketSubject.getValue(),
       });
-      throw new Error('An error occured when checking out');
+      throw new Error("An error occured when checking out");
     } catch (error) {
       console.error(error);
     }

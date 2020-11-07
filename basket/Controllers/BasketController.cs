@@ -8,6 +8,7 @@ using basket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace basket.Controllers
 {
@@ -16,17 +17,19 @@ namespace basket.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
+        private readonly ILogger _log;
 
-        public BasketController(IBasketService basketService)
+        public BasketController(IBasketService basketService, ILogger<BasketController> logger)
         {
             _basketService = basketService;
+            _log = logger;
         }
 
         [HttpGet]
         [Authorize]
         public IActionResult GetBasket() => Ok(_basketService.GetBasket());
 
-        [HttpPost]
+        [HttpPost("add")]
         [Authorize]
         public IActionResult AddItemToBasket(AddItemRequest model)
         {
@@ -39,6 +42,18 @@ namespace basket.Controllers
         {
             _basketService.ClearBasket();
             return Ok();
+        }
+
+        [HttpPost("checkout")]
+        [Authorize]
+        public IActionResult Checkout(CheckoutRequest model)
+        {
+            if (model.Basket.Count > 1)
+            {
+                _log.LogError("Unexpected error - too many items in basket.");
+                return BadRequest("Unexpected error occured.");
+            }
+            return Ok(_basketService.Checkout());
         }
 
     }
