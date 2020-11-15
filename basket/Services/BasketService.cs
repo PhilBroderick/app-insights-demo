@@ -1,5 +1,6 @@
 ﻿using basket.Entities;
 using basket.Interfaces;
+using basket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +33,16 @@ namespace basket.Services
         }
 
         public void ClearBasket() => _basket.Clear();
+
+        public CheckoutResponse Checkout()
+        {
+            var response = new CheckoutResponse
+            {
+                CheckedOutBasket = _basket,
+                Total = _basket.Sum(b => b.Price * b.Quantity)
+            };
+            _basket = new List<BasketItem>();
+            return response;
+        }
     }
 }

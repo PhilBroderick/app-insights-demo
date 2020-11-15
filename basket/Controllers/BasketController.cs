@@ -33,6 +33,7 @@ namespace basket.Controllers
         [Authorize]
         public IActionResult AddItemToBasket(AddItemRequest model)
         {
+            _log.LogInformation($"Adding: {model.Name} to basket, quantity: {model.Quantity}.");
             return Ok(_basketService.AddItemToBasket(new BasketItem { Id = model.Id, Name = model.Name, Price = model.Price, Quantity = model.Quantity }));
         }
 
@@ -40,6 +41,7 @@ namespace basket.Controllers
         [Authorize]
         public IActionResult ClearBasket()
         {
+            _log.LogInformation("Clearing basket.");
             _basketService.ClearBasket();
             return Ok();
         }
@@ -53,6 +55,7 @@ namespace basket.Controllers
                 _log.LogError("Unexpected error - too many items in basket.");
                 return BadRequest("Unexpected error occured.");
             }
+            _log.LogInformation("Checking out basket.");
             return Ok(_basketService.Checkout());
         }
 

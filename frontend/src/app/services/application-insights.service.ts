@@ -19,7 +19,7 @@ export class ApplicationInsightsService {
         enableAutoRouteTracking: true, // option to log all route changes
         disableCorrelationHeaders: false,
         enableCorsCorrelation: true,
-        autoTrackPageVisitTime: true
+        autoTrackPageVisitTime: true,
       },
     });
 

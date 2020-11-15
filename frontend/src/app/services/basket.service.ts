@@ -1,3 +1,4 @@
+import { BasketCheckout } from "./../models/basket-checkout.model";
 import { ApplicationInsightsService } from "./application-insights.service";
 import { CatalogItem } from "./../models/catalog-item.model";
 import { environment } from "./../../environments/environment";
@@ -53,21 +54,11 @@ export class BasketService {
       .subscribe((response) => this.basketSubject.next([]));
   };
 
-  checkout = () => {
-    this.http
-      .post(
-        `${this.basketApiUrl}/checkout`,
-        { Basket: this.basketSubject.getValue() },
-        { headers: this.headers }
-      )
-      .subscribe((response) => console.log(response));
-    try {
-      this.aiService.logEvent("checkout", {
-        cart: this.basketSubject.getValue(),
-      });
-      throw new Error("An error occured when checking out");
-    } catch (error) {
-      console.error(error);
-    }
+  checkout = (): Observable<BasketCheckout> => {
+    return this.http.post<BasketCheckout>(
+      `${this.basketApiUrl}/checkout`,
+      { Basket: this.basketSubject.getValue() },
+      { headers: this.headers }
+    );
   };
 }
