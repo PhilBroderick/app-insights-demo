@@ -18,11 +18,11 @@ namespace catalog.TelemetryInitializers
 
         public void Initialize(ITelemetry telemetry)
         {
-            var user = (User)_httpContextAccessor.HttpContext?.Items["User"];
+            var userId = _httpContextAccessor?.HttpContext?.User.Identity.Name;
 
-            if(user != null)
+            if(userId != null)
             {
-                telemetry.Context.User.Id = user.Id.ToString();
+                telemetry.Context.User.Id = userId;
             }
         }
     }

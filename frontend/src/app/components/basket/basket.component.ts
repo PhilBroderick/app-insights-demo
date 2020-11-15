@@ -13,4 +13,10 @@ export class BasketComponent implements OnInit {
   constructor(public basketService: BasketService) {}
 
   ngOnInit() {}
+
+  checkout = () => {
+    this.basketService
+      .checkout()
+      .subscribe((response) => this.basketService.clearBasket());
+  };
 }

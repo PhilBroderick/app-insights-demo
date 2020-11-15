@@ -18,8 +18,8 @@ namespace auth.Services
     {
         private readonly IEnumerable<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Phil", LastName = "Broderick", Username = "user1", Password = "Password1" },
-            new User { Id = 2, FirstName = "Phil", LastName = "Broderick", Username = "user2", Password = "Password2"}
+            new User { Id = 1234, FirstName = "Phil", LastName = "Broderick", Username = "user1", Password = "Password1" },
+            new User { Id = 4321, FirstName = "Phil", LastName = "Broderick", Username = "user2", Password = "Password2"}
         };
 
         private readonly AppSettings _appSettings;
@@ -46,7 +46,7 @@ namespace auth.Services
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, user.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

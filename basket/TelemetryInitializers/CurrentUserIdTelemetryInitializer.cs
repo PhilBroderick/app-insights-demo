@@ -15,12 +15,12 @@ namespace basket.TelemetryInitializers
 
         public void Initialize(ITelemetry telemetry)
         {
-            //var user = (User)_httpContextAccessor.HttpContext?.Items["User"];
+            var userId = _httpContextAccessor?.HttpContext?.User.Identity.Name;
 
-            //if(user != null)
-            //{
-            //    telemetry.Context.User.Id = user.Id.ToString();
-            //}
+            if (userId != null)
+            {
+                telemetry.Context.User.Id = userId;
+            }
         }
     }
 }

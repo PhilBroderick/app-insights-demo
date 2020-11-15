@@ -18,11 +18,10 @@ namespace auth.TelemetryInitializers
 
         public void Initialize(ITelemetry telemetry)
         {
-            var user = (User)_httpContextAccessor.HttpContext?.Items["User"];
-
-            if(user != null)
+            var userId = _httpContextAccessor?.HttpContext?.User.Identity.Name;
+            if (userId != null)
             {
-                telemetry.Context.User.Id = user.Id.ToString();
+                telemetry.Context.User.Id = userId;
             }
         }
     }
